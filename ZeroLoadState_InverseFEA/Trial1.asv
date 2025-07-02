@@ -12,7 +12,7 @@ lineWidth=3;
 % % Control parameters
 % Path names
 % savePath=uigetdir();
-savePath=fullfile(pwd,"FeBio");
+savePath="C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\FeBio\July2025\Gibbon";
 
 % Defining file names
 febioFebFileNamePart='tempModel';
@@ -46,10 +46,10 @@ runMode='internal';% 'internal' or 'external'
 
 
 % Load the stl file
-[BaseStruct] = import_STL("Meshes\base.stl");
-[LVStruct] = import_STL("Meshes\LV.stl");
-[RVStruct] = import_STL("Meshes\RV.stl");
-[epiStruct] = import_STL("Meshes\epi.stl");
+[BaseStruct] = import_STL("C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Meshes\July2025\base.stl");
+[LVStruct] = import_STL("C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Meshes\July2025\LV.stl");
+[RVStruct] = import_STL("C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Meshes\July2025\RV.stl");
+[epiStruct] = import_STL("C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Meshes\July2025\epi.stl");
 
 F_base = BaseStruct.solidFaces{1};
 V_base = BaseStruct.solidVertices{1};
@@ -123,11 +123,11 @@ gpatch(Fb,V,Cb,'k',1);
 axisGeom; camlight headlight;
 drawnow;
 
-% [VE]=patchCentre(E,V);
-% cFigure; hold on;
-% plotV(VE,'.');
-% axisGeom; camlight headlight;
-% drawnow;
+[VE]=patchCentre(E,V);
+cFigure; hold on;
+plotV(VE,'.');
+axisGeom; camlight headlight;
+drawnow;
 
 %%
 
@@ -400,47 +400,47 @@ axisGeom; camlight headlight;
 drawnow;
 
 
-%% Animations
-if runFlag==1 %i.e. a succesful run
-
-    dataStruct=importFEBio_logfile(fullfile(savePath,febioLogFileName_disp),0,1);
-
-    %Access data
-    N_disp_mat=dataStruct.data; %Displacement
-    timeVec=dataStruct.time; %Time
-
-    %Create deformed coordinate set
-    V_DEF=N_disp_mat+repmat(V,[1 1 size(N_disp_mat,3)]);
-    % Plotting the simulated results using anim8 to visualize and animate deformations
-    DN_magnitude=sqrt(sum(N_disp_mat(:,:,end).^2,2)); %Current displacement magnitude
-
-    % Create basic view and store graphics handle to initiate animation
-    hf=cFigure; %Open figure
-    gtitle([febioFebFileNamePart,': Press play to animate']);
-    title('Displacement magnitude [mm]','Interpreter','Latex')
-    hp=gpatch(Fb,V_DEF(:,:,end),DN_magnitude,'k',1); %Add graphics object to animate
-    hp.Marker='.';
-    hp.MarkerSize=markerSize/10;
-    hp.FaceColor='interp';
-
-    axisGeom(gca,fontSize);
-    colormap(gjet(250)); colorbar;
-    caxis([0 max(DN_magnitude)]);
-    axis(axisLim(V_DEF)); %Set axis limits statically
-    camlight headlight;
-
-    % Set up animation features
-    animStruct.Time=timeVec; %The time vector
-    for qt=1:1:size(N_disp_mat,3) %Loop over time increments
-        DN_magnitude=sqrt(sum(N_disp_mat(:,:,qt).^2,2)); %Current displacement magnitude
-
-        %Set entries in animation structure
-        animStruct.Handles{qt}=[hp hp]; %Handles of objects to animate
-        animStruct.Props{qt}={'Vertices','CData'}; %Properties of objects to animate
-        animStruct.Set{qt}={V_DEF(:,:,qt),DN_magnitude}; %Property values for to set in order to animate
-    end
-    anim8(hf,animStruct); %Initiate animation feature
-    drawnow;
-end
+%%
+% if runFlag==1 %i.e. a succesful run
+% 
+%     dataStruct=importFEBio_logfile(fullfile(savePath,febioLogFileName_disp),0,1);
+% 
+%     %Access data
+%     N_disp_mat=dataStruct.data; %Displacement
+%     timeVec=dataStruct.time; %Time
+% 
+%     %Create deformed coordinate set
+%     V_DEF=N_disp_mat+repmat(V,[1 1 size(N_disp_mat,3)]);
+%     % Plotting the simulated results using anim8 to visualize and animate deformations
+%     DN_magnitude=sqrt(sum(N_disp_mat(:,:,end).^2,2)); %Current displacement magnitude
+% 
+%     % Create basic view and store graphics handle to initiate animation
+%     hf=cFigure; %Open figure
+%     gtitle([febioFebFileNamePart,': Press play to animate']);
+%     title('Displacement magnitude [mm]','Interpreter','Latex')
+%     hp=gpatch(Fb,V_DEF(:,:,end),DN_magnitude,'k',1); %Add graphics object to animate
+%     hp.Marker='.';
+%     hp.MarkerSize=markerSize/10;
+%     hp.FaceColor='interp';
+% 
+%     axisGeom(gca,fontSize);
+%     colormap(gjet(250)); colorbar;
+%     caxis([0 max(DN_magnitude)]);
+%     axis(axisLim(V_DEF)); %Set axis limits statically
+%     camlight headlight;
+% 
+%     % Set up animation features
+%     animStruct.Time=timeVec; %The time vector
+%     for qt=1:1:size(N_disp_mat,3) %Loop over time increments
+%         DN_magnitude=sqrt(sum(N_disp_mat(:,:,qt).^2,2)); %Current displacement magnitude
+% 
+%         %Set entries in animation structure
+%         animStruct.Handles{qt}=[hp hp]; %Handles of objects to animate
+%         animStruct.Props{qt}={'Vertices','CData'}; %Properties of objects to animate
+%         animStruct.Set{qt}={V_DEF(:,:,qt),DN_magnitude}; %Property values for to set in order to animate
+%     end
+%     anim8(hf,animStruct); %Initiate animation feature
+%     drawnow;
+% end
 
 
