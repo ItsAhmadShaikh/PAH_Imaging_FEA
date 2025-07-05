@@ -72,15 +72,15 @@ C_epi=4*ones(size(F_epi,1),1);
 %merging sets
 [F,V]=mergeVertices(F,V);
 
-% % Visualize heart surface
-cFigure; hold on;
-gpatch(F,V,C,'k',1);
-axisGeom; camlight headlight;
-drawnow;
-
-[N,P,NV]=patchNormal(F,V);
-s=mean(patchEdgeLengths(F,V));
-quiverVec(P,N,s,'k')
+% % % % % % % % % Visualize heart surface
+% % % % % % % cFigure; hold on;
+% % % % % % % gpatch(F,V,C,'k',1);
+% % % % % % % axisGeom; camlight headlight;
+% % % % % % % drawnow;
+% % % % % % % 
+% % % % % % % [N,P,NV]=patchNormal(F,V);
+% % % % % % % s=mean(patchEdgeLengths(F,V));
+% % % % % % % quiverVec(P,N,s,'k')
 
 
 % % Mesh using tetgen
@@ -88,12 +88,12 @@ quiverVec(P,N,s,'k')
 V_inner=getInnerPoint(F,V);
 
 
-% % Visualize interior point
-cFigure; hold on;
-gpatch(F,V,'w','none',0.5);
-plotV(V_inner,'r.','MarkerSize',25)
-axisGeom; camlight headlight;
-drawnow;
+% % % % % % % % % Visualize interior point
+% % % % % % % cFigure; hold on;
+% % % % % % % gpatch(F,V,'w','none',0.5);
+% % % % % % % plotV(V_inner,'r.','MarkerSize',25)
+% % % % % % % axisGeom; camlight headlight;
+% % % % % % % drawnow;
 
 %%
 
@@ -116,18 +116,13 @@ Fb=meshOutput.facesBoundary;
 Cb=meshOutput.boundaryMarker;
 CE=meshOutput.elementMaterialID;
 
-meshView(meshOutput);
+% % % % % % % meshView(meshOutput);
 
-cFigure; hold on;
-gpatch(Fb,V,Cb,'k',1);
-axisGeom; camlight headlight;
-drawnow;
+% % % % % % % cFigure; hold on;
+% % % % % % % gpatch(Fb,V,Cb,'k',1);
+% % % % % % % axisGeom; camlight headlight;
+% % % % % % % drawnow;
 
-% [VE]=patchCentre(E,V);
-% cFigure; hold on;
-% plotV(VE,'.');
-% axisGeom; camlight headlight;
-% drawnow;
 
 %%
 
@@ -142,9 +137,9 @@ F_LV_pressure= fliplr(Fb(Cb==2,:));
 % F_RV_pressure=Fb(Cb==3,:);
 F_RV_pressure= fliplr(Fb(Cb==3,:));
 
-% Visualize
+% Visualize BC and Load
 hf=cFigure;
-title('Boundary conditions','FontSize',fontSize);
+title('Boundary conditions and loads','FontSize',fontSize);
 xlabel('X','FontSize',fontSize); ylabel('Y','FontSize',fontSize); zlabel('Z','FontSize',fontSize);
 hold on;
 
@@ -256,8 +251,8 @@ febio_spec.MeshDomains.SolidDomain.ATTR.mat=materialName1;
 febio_spec.Boundary.bc{1}.ATTR.name='FixedDisplacement01';
 febio_spec.Boundary.bc{1}.ATTR.type='zero displacement';
 febio_spec.Boundary.bc{1}.ATTR.node_set=nodeSetName1;
-febio_spec.Boundary.bc{1}.x_dof=0;
-febio_spec.Boundary.bc{1}.y_dof=0;
+febio_spec.Boundary.bc{1}.x_dof=1;
+febio_spec.Boundary.bc{1}.y_dof=1;
 febio_spec.Boundary.bc{1}.z_dof=1;
 
 
@@ -265,13 +260,13 @@ febio_spec.Boundary.bc{1}.z_dof=1;
 febio_spec.Loads.surface_load{1}.ATTR.type='pressure';
 febio_spec.Loads.surface_load{1}.ATTR.surface=LV_surfaceName;
 febio_spec.Loads.surface_load{1}.pressure.ATTR.lc=1;
-febio_spec.Loads.surface_load{1}.pressure.VAL=2;
+febio_spec.Loads.surface_load{1}.pressure.VAL=6;
 febio_spec.Loads.surface_load{1}.symmetric_stiffness=1;
 
 febio_spec.Loads.surface_load{2}.ATTR.type='pressure';
 febio_spec.Loads.surface_load{2}.ATTR.surface=RV_surfaceName;
 febio_spec.Loads.surface_load{2}.pressure.ATTR.lc=1;
-febio_spec.Loads.surface_load{2}.pressure.VAL=2;
+febio_spec.Loads.surface_load{2}.pressure.VAL=6;
 febio_spec.Loads.surface_load{2}.symmetric_stiffness=1;
 
 
@@ -370,32 +365,32 @@ drawnow;
 
 gpatch(Fb,V_FinalDeformed,'w','r',0.25);
 
-[F_new,V_new]=mergeVertices(Fb,V_FinalDeformed);
-V_inner_new = getInnerPoint(F_new,V_new,[],[],1);
-
-tetVolume_new=tetVolMeanEst(F_new,V_new); %Volume for regular tets
-
-tetGenStruct.stringOpt='-pq1.2AaY';
-tetGenStruct.Faces=F_new;
-tetGenStruct.Nodes=V_new;
-tetGenStruct.holePoints=[];
-tetGenStruct.faceBoundaryMarker=C; %Face boundary markers
-tetGenStruct.regionPoints=V_inner_new; %region points
-tetGenStruct.regionA=tetVolume_new;
-
-[meshOutput_new]=runTetGen(tetGenStruct); %Run tetGen
-
-% Access elements, nodes, and boundary faces
-E=meshOutput_new.elements;
-V_new=meshOutput_new.nodes;
-Fb_new=meshOutput_new.facesBoundary;
-Cb_new=meshOutput_new.boundaryMarker;
-CE=meshOutput_new.elementMaterialID;
+% [F_new,V_new]=mergeVertices(Fb,V_FinalDeformed);
+% V_inner_new = getInnerPoint(F_new,V_new,[],[],1);
+% 
+% tetVolume_new=tetVolMeanEst(F_new,V_new); %Volume for regular tets
+% 
+% tetGenStruct.stringOpt='-pq1.2AaY';
+% tetGenStruct.Faces=F_new;
+% tetGenStruct.Nodes=V_new;
+% tetGenStruct.holePoints=[];
+% tetGenStruct.faceBoundaryMarker=C; %Face boundary markers
+% tetGenStruct.regionPoints=V_inner_new; %region points
+% tetGenStruct.regionA=tetVolume_new;
+% 
+% [meshOutput_new]=runTetGen(tetGenStruct); %Run tetGen
+% 
+% % Access elements, nodes, and boundary faces
+% E=meshOutput_new.elements;
+% V_new=meshOutput_new.nodes;
+% Fb_new=meshOutput_new.facesBoundary;
+% Cb_new=meshOutput_new.boundaryMarker;
+% CE=meshOutput_new.elementMaterialID;
 
 % % % % % % meshView(meshOutput);
 
 cFigure; hold on;
-gpatch(Fb_new,V_new,Cb_new,'k',0.5);
+gpatch(Fb,V_FinalDeformed,Cb,'k',0.5);
 axisGeom; camlight headlight;
 drawnow;
 

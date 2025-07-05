@@ -1,0 +1,1025 @@
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.9.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2025 - All rights reserved                            
+                                                                           
+===========================================================================
+
+
+
+
+
+ FILES USED
+===========================================================================
+	Input file : C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel.feb
+	Plot file  : C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel.xplt
+	Log file   : C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel.txt
+
+
+ MESH INFO
+===========================================================================
+	Number of materials ............................ : 1
+	Number of domains .............................. : 1
+	Number of nodes ................................ : 39700
+	Number of solid elements ....................... : 183284
+
+
+ MODULE
+===========================================================================
+	Module type ....................................... : solid
+
+
+ CONTROL DATA
+===========================================================================
+	analysis .......................................... : DYNAMIC (1)
+	time_steps ........................................ : 10
+	step_size ......................................... : 0.1
+	plot_zero_state ................................... : yes (1)
+	plot_range ........................................ : 0,-1
+	plot_level ........................................ : PLOT_MAJOR_ITRS (1)
+	output_level ...................................... : OUTPUT_MAJOR_ITRS (1)
+	plot_stride ....................................... : 1
+	output_stride ..................................... : 1
+	adaptor_re_solve .................................. : yes (1)
+	Auto time stepper activated ....................... : yes
+	  max_retries ..................................... : 6
+	  opt_iter ........................................ : 15
+	  dtmin ........................................... : 0.001
+	  dtmax ........................................... : 0.1
+	  aggressiveness .................................. : 0
+	  cutback ......................................... : 0.5
+	  dtforce ......................................... : no (0)
+ SOLVER PARAMETERS
+===========================================================================
+	symmetric_stiffness ............................... : non-symmetric (0)
+	equation_scheme ................................... : staggered (0)
+	equation_order .................................... : default (0)
+	optimize_bw ....................................... : no (0)
+	lstol ............................................. : 0.9
+	lsmin ............................................. : 0.01
+	lsiter ............................................ : 5
+	ls_check_jacobians ................................ : no (0)
+	max_refs .......................................... : 25
+	check_zero_diagonal ............................... : no (0)
+	zero_diagonal_tol ................................. : 0
+	force_partition ................................... : 0
+	reform_each_time_step ............................. : yes (1)
+	reform_augment .................................... : no (0)
+	diverge_reform .................................... : yes (1)
+	min_residual ...................................... : 1e-20
+	max_residual ...................................... : 0
+	dtol .............................................. : 0.001
+	etol .............................................. : 0.01
+	rtol .............................................. : 0
+	rhoi .............................................. : 0
+	alpha ............................................. : 1
+	beta .............................................. : 0.25
+	gamma ............................................. : 0.5
+	logSolve .......................................... : no (0)
+	arc_length ........................................ : 0
+	arc_length_scale .................................. : 0
+
+
+
+
+
+
+ MATERIAL DATA
+===========================================================================
+  1 - Material1 (type: Holzapfel_Ogden)
+	density ........................................... : 1
+	k ................................................. : 10000
+	pressure_model .................................... : default (0)
+	a ................................................. : 7.75246
+	b ................................................. : 22.8274
+	af ................................................ : 2.30674
+	bf ................................................ : 50
+	as ................................................ : 0.114922
+	bs ................................................ : 109.12
+	afs ............................................... : 0
+	bfs ............................................... : 0
+	asn ............................................... : 0
+	bsn ............................................... : 0
+	anf ............................................... : 0
+	bnf ............................................... : 0
+
+
+ BOUNDARY CONDITION DATA
+===========================================================================
+  1 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : yes (1)
+
+
+ MODEL LOAD DATA
+===========================================================================
+  1 -  Type: pressure
+	pressure .......................................... : 7
+	symmetric_stiffness ............................... : yes (1)
+	linear ............................................ : no (0)
+	shell_bottom ...................................... : no (0)
+---------------------------------------------------------------------------
+  2 -  Type: pressure
+	pressure .......................................... : 7
+	symmetric_stiffness ............................... : yes (1)
+	linear ............................................ : no (0)
+	shell_bottom ...................................... : no (0)
+
+
+ LOAD CONTROLLER DATA
+===========================================================================
+load controller   1 - LC_1 (type: loadcurve)
+	interpolate ....................................... : LINEAR (0)
+	extend ............................................ : CONSTANT (0)
+	points ............................................ : (can't display value)
+
+
+ OUTPUT DATA
+===========================================================================
+ LINEAR SOLVER DATA
+===========================================================================
+	Default linear solver ............................. : pardiso
+
+
+Data Record #1
+===========================================================================
+Step = 0
+Time = 0
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 0
+Time = 0
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+===== beginning time step 1 : 0.1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 114786
+	Nr of nonzeroes in stiffness matrix ....... : 4572756
+ 1
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.827932e+00    5.316058e-03    0.000000e+00 
+	   energy              4.015537e-01    1.299849e-04    4.015537e-03 
+	   displacement        1.070186e-01    1.070186e-01    1.070186e-07 
+ 2
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.827932e+00    6.847166e-07    0.000000e+00 
+	   energy              4.015537e-01    1.382850e-07    4.015537e-03 
+	   displacement        1.070186e-01    1.558637e-06    1.071137e-07 
+ 3
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.827932e+00    6.021918e-10    0.000000e+00 
+	   energy              4.015537e-01    1.811053e-11    4.015537e-03 
+	   displacement        1.070186e-01    1.394019e-09    1.071195e-07 
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 1
+
+------- converged at time : 0.1
+
+
+Data Record #1
+===========================================================================
+Step = 1
+Time = 0.1
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 1
+Time = 0.1
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 2 : 0.2 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.741696e+01    3.145726e-01    0.000000e+00 
+	   energy              4.334985e+00    1.215046e-03    4.334985e-02 
+	   displacement        1.193823e+00    1.193823e+00    1.193823e-06 
+ 2
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.741696e+01    5.910037e-05    0.000000e+00 
+	   energy              4.334985e+00    1.675661e-07    4.334985e-02 
+	   displacement        1.193823e+00    1.484550e-05    1.194508e-06 
+ 3
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.741696e+01    1.159827e-06    0.000000e+00 
+	   energy              4.334985e+00    8.358930e-09    4.334985e-02 
+	   displacement        1.193823e+00    6.129336e-08    1.194749e-06 
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 1
+
+------- converged at time : 0.2
+
+
+Data Record #1
+===========================================================================
+Step = 2
+Time = 0.2
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 2
+Time = 0.2
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 3 : 0.3 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.357699e+02    3.898611e+00    0.000000e+00 
+	   energy              1.928348e+01    7.022746e-04    1.928348e-01 
+	   displacement        5.335074e+00    5.335074e+00    5.335074e-06 
+ 2
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.357699e+02    1.759995e-03    0.000000e+00 
+	   energy              1.928348e+01    4.207623e-05    1.928348e-01 
+	   displacement        5.335074e+00    5.999981e-05    5.333954e-06 
+ 3
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.357699e+02    1.236384e-04    0.000000e+00 
+	   energy              1.928348e+01    2.760910e-07    1.928348e-01 
+	   displacement        5.335074e+00    2.009650e-06    5.337001e-06 
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 1
+
+------- converged at time : 0.3
+
+
+Data Record #1
+===========================================================================
+Step = 3
+Time = 0.3
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 3
+Time = 0.3
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 4 : 0.4 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.276225e+02    2.352878e+01    0.000000e+00 
+	   energy              5.616457e+01    3.076984e-02    5.616457e-01 
+	   displacement        1.553645e+01    1.553645e+01    1.553645e-05 
+ 2
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.276225e+02    3.038220e-02    0.000000e+00 
+	   energy              5.616457e+01    6.143161e-04    5.616457e-01 
+	   displacement        1.553645e+01    2.148055e-04    1.550972e-05 
+ 3
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.276225e+02    1.803571e-03    0.000000e+00 
+	   energy              5.616457e+01    9.750957e-06    5.616457e-01 
+	   displacement        1.553645e+01    2.149103e-05    1.552635e-05 
+ 4
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.276225e+02    6.347552e-06    0.000000e+00 
+	   energy              5.616457e+01    7.386655e-08    5.616457e-01 
+	   displacement        1.553645e+01    3.156595e-07    1.552854e-05 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.4
+
+
+Data Record #1
+===========================================================================
+Step = 4
+Time = 0.4
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 4
+Time = 0.4
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 5 : 0.5 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.011457e+03    9.249728e+01    0.000000e+00 
+	   energy              1.271695e+02    2.075868e-01    1.271695e+00 
+	   displacement        3.509766e+01    3.509766e+01    3.509766e-05 
+ 2
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.011457e+03    3.221160e-01    0.000000e+00 
+	   energy              1.271695e+02    4.478588e-03    1.271695e+00 
+	   displacement        3.509766e+01    9.581135e-04    3.494863e-05 
+ 3
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.011457e+03    1.522410e-02    0.000000e+00 
+	   energy              1.271695e+02    1.473373e-04    1.271695e+00 
+	   displacement        3.509766e+01    1.241337e-04    3.500685e-05 
+ 4
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.011457e+03    2.945577e-04    0.000000e+00 
+	   energy              1.271695e+02    2.791886e-06    1.271695e+00 
+	   displacement        3.509766e+01    7.830267e-06    3.502338e-05 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.5
+
+
+Data Record #1
+===========================================================================
+Step = 5
+Time = 0.5
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 5
+Time = 0.5
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 6 : 0.6 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.983654e+03    2.698709e+02    0.000000e+00 
+	   energy              2.427276e+02    8.516155e-01    2.427276e+00 
+	   displacement        6.670143e+01    6.670143e+01    6.670143e-05 
+ 2
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.983654e+03    2.340637e+00    0.000000e+00 
+	   energy              2.427276e+02    2.203378e-02    2.427276e+00 
+	   displacement        6.670143e+01    4.500511e-03    6.614544e-05 
+ 3
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.983654e+03    1.304427e-01    0.000000e+00 
+	   energy              2.427276e+02    7.580665e-04    2.427276e+00 
+	   displacement        6.670143e+01    5.931070e-04    6.631376e-05 
+ 4
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.983654e+03    7.511944e-03    0.000000e+00 
+	   energy              2.427276e+02    1.773069e-05    2.427276e+00 
+	   displacement        6.670143e+01    3.949370e-05    6.636595e-05 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.6
+
+
+Data Record #1
+===========================================================================
+Step = 6
+Time = 0.6
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 6
+Time = 0.6
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 7 : 0.7 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.389430e+03    6.270915e+02    0.000000e+00 
+	   energy              4.062660e+02    2.771928e+00    4.062660e+00 
+	   displacement        1.107852e+02    1.107852e+02    1.107852e-04 
+ 2
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.389430e+03    1.262005e+01    0.000000e+00 
+	   energy              4.062660e+02    8.622498e-02    4.062660e+00 
+	   displacement        1.107852e+02    1.990512e-02    1.090987e-04 
+ 3
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.389430e+03    1.079600e+00    0.000000e+00 
+	   energy              4.062660e+02    1.854854e-03    4.062660e+00 
+	   displacement        1.107852e+02    2.562079e-03    1.095214e-04 
+ 4
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.389430e+03    1.127259e-01    0.000000e+00 
+	   energy              4.062660e+02    7.943477e-05    4.062660e+00 
+	   displacement        1.107852e+02    9.980143e-05    1.096294e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.7
+
+
+Data Record #1
+===========================================================================
+Step = 7
+Time = 0.7
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 7
+Time = 0.7
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 8 : 0.8 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            5.141290e+03    1.349366e+03    0.000000e+00 
+	   energy              6.028867e+02    7.885754e+00    6.028867e+00 
+	   displacement        1.621008e+02    1.621008e+02    1.621008e-04 
+ 2
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            5.141290e+03    1.754062e+02    0.000000e+00 
+	   energy              6.028867e+02    5.190185e-01    6.028867e+00 
+	   displacement        1.621008e+02    8.475737e-02    1.576344e-04 
+ 3
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            5.141290e+03    1.886493e+01    0.000000e+00 
+	   energy              6.028867e+02    3.021706e-02    6.028867e+00 
+	   displacement        1.621008e+02    1.173316e-02    1.586132e-04 
+ 4
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.540598
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            5.141290e+03    2.867138e+00    0.000000e+00 
+	   energy              6.028867e+02    3.790724e-03    6.028867e+00 
+	   displacement        1.621008e+02    1.621751e-04    1.587166e-04 
+ 5
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 4
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 0.520703
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            5.141290e+03    5.987759e-01    0.000000e+00 
+	   energy              6.028867e+02    4.698279e-05    6.028867e+00 
+	   displacement        1.621008e+02    4.182317e-05    1.587798e-04 
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 1
+
+------- converged at time : 0.8
+
+
+Data Record #1
+===========================================================================
+Step = 8
+Time = 0.8
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 8
+Time = 0.8
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 9 : 0.9 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.829890e+03    3.734903e+03    0.000000e+00 
+	   energy              7.786676e+02    1.828164e+01    7.786676e+00 
+	   displacement        2.042508e+02    2.042508e+02    2.042508e-04 
+ 2
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.829890e+03    1.424592e+03    0.000000e+00 
+	   energy              7.786676e+02    2.744470e+00    7.786676e+00 
+	   displacement        2.042508e+02    2.903364e-01    1.948021e-04 
+ 3
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.829890e+03    3.131491e+02    0.000000e+00 
+	   energy              7.786676e+02    2.438997e-01    7.786676e+00 
+	   displacement        2.042508e+02    4.987198e-02    1.967203e-04 
+ 4
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.583202
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.829890e+03    7.192707e+01    0.000000e+00 
+	   energy              7.786676e+02    3.466051e-02    7.786676e+00 
+	   displacement        2.042508e+02    2.239954e-03    1.970029e-04 
+ 5
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 4
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 0.431022
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.829890e+03    5.847968e+00    0.000000e+00 
+	   energy              7.786676e+02    3.890232e-03    7.786676e+00 
+	   displacement        2.042508e+02    1.859125e-04    1.971297e-04 
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 1
+
+------- converged at time : 0.9
+
+
+Data Record #1
+===========================================================================
+Step = 9
+Time = 0.9
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 9
+Time = 0.9
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+===== beginning time step 10 : 1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.630383e+03    9.939909e+03    0.000000e+00 
+	   energy              8.371734e+02    2.944533e+01    8.371734e+00 
+	   displacement        2.124413e+02    2.124413e+02    2.124413e-04 
+ 2
+ Nonlinear solution status: time= 1
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.601498
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.630383e+03    2.913413e+03    0.000000e+00 
+	   energy              8.371734e+02    2.803659e+00    8.371734e+00 
+	   displacement        2.124413e+02    2.325941e-01    2.039997e-04 
+ 3
+ Nonlinear solution status: time= 1
+	stiffness updates             = 2
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.413155
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.630383e+03    1.116651e+03    0.000000e+00 
+	   energy              8.371734e+02    6.587856e-01    8.371734e+00 
+	   displacement        2.124413e+02    1.549768e-02    2.030020e-04 
+ 4
+ Nonlinear solution status: time= 1
+	stiffness updates             = 3
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 0.500000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.630383e+03    5.820697e+05    0.000000e+00 
+	   energy              8.371734e+02    2.504342e+00    8.371734e+00 
+	   displacement        2.124413e+02    8.963195e-03    2.028159e-04 
+ 5
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1
+
+Retrying time step. Retry attempt 1 of max 6
+
+
+AUTO STEPPER: retry step, dt = 0.0857143
+
+
+===== beginning time step 10 : 0.985714 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.985714
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.025132e+04    3.539517e+03    0.000000e+00 
+	   energy              8.341035e+02    1.771140e+01    8.341035e+00 
+	   displacement        1.581368e+02    1.581368e+02    1.581368e-04 
+ 2
+ Nonlinear solution status: time= 0.985714
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.025132e+04    1.933605e+03    0.000000e+00 
+	   energy              8.341035e+02    2.863692e+00    8.341035e+00 
+	   displacement        1.581368e+02    1.873525e-01    1.516766e-04 
+ 3
+ Nonlinear solution status: time= 0.985714
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.025132e+04    2.946780e+02    0.000000e+00 
+	   energy              8.341035e+02    1.883653e-01    8.341035e+00 
+	   displacement        1.581368e+02    3.943117e-02    1.528015e-04 
+ 4
+ Nonlinear solution status: time= 0.985714
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.510078
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.025132e+04    3.831698e+01    0.000000e+00 
+	   energy              8.341035e+02    5.022025e-03    8.341035e+00 
+	   displacement        1.581368e+02    1.296623e-03    1.529931e-04 
+ 5
+ Nonlinear solution status: time= 0.985714
+	stiffness updates             = 4
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 0.573793
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.025132e+04    6.409321e+00    0.000000e+00 
+	   energy              8.341035e+02    4.189920e-03    8.341035e+00 
+	   displacement        1.581368e+02    2.365691e-04    1.531136e-04 
+ 6
+ Nonlinear solution status: time= 0.985714
+	stiffness updates             = 5
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 1
+	step from line search         = 0.507976
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.025132e+04    2.734854e+00    0.000000e+00 
+	   energy              8.341035e+02    1.749420e-03    8.341035e+00 
+	   displacement        1.581368e+02    4.010133e-05    1.531556e-04 
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 1
+
+------- converged at time : 0.985714
+
+
+Data Record #1
+===========================================================================
+Step = 10
+Time = 0.985714286
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 10
+Time = 0.985714286
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+AUTO STEPPER: increasing time step, dt = 0.0885714
+
+MUST POINT CONTROLLER: adjusting time step. dt = 0.0142857
+
+
+===== beginning time step 11 : 1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.442727e+05    2.300548e+00    0.000000e+00 
+	   energy              7.942056e+02    8.449555e-02    7.942056e+00 
+	   displacement        4.370081e+00    4.370081e+00    4.370081e-06 
+ 2
+ Nonlinear solution status: time= 1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.442727e+05    4.678055e-02    0.000000e+00 
+	   energy              7.942056e+02    9.232431e-05    7.942056e+00 
+	   displacement        4.370081e+00    2.897321e-06    4.368802e-06 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 1
+
+
+Data Record #1
+===========================================================================
+Step = 11
+Time = 1
+Data = ux;uy;uz
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_disp_out.txt
+
+Data Record #2
+===========================================================================
+Step = 11
+Time = 1
+Data = s1
+File = C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\ZeroLoadState_InverseFEA\FeBio\tempModel_stress_out.txt
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 11
+
+	Total number of equilibrium iterations ............ : 43
+
+	Average number of equilibrium iterations .......... : 3.90909
+
+	Total number of right hand evaluations ............ : 61
+
+	Total number of stiffness reformations ............ : 11
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 48
+
+	Avg iterations per solve ............ : 1
+
+	Time in linear solver: 0:00:35
+
+ Peak memory  : 1510.7 MB
+
+ Elapsed time : 0:00:59
+
+ T I M I N G   I N F O R M A T I O N
+
+	Input time ...................... : 0:00:00 (0.38198 sec)
+
+	Initialization time ............. : 0:00:00 (0.291242 sec)
+
+	Solve time ...................... : 0:00:59 (59.0321 sec)
+
+	   IO-time (plot, dmp, data) .... : 0:00:07 (7.42243 sec)
+
+	   reforming stiffness .......... : 0:00:00 (0.334689 sec)
+
+	   evaluating stiffness ......... : 0:00:04 (4.40257 sec)
+
+	   evaluating residual .......... : 0:00:05 (4.99026 sec)
+
+	   model update ................. : 0:00:03 (3.42358 sec)
+
+	   QN updates ................... : 0:00:03 (2.64542 sec)
+
+	   time in linear solver ........ : 0:00:35 (34.5436 sec)
+
+	Total elapsed time .............. : 0:01:00 (60.3435 sec)
+
+
+ N O R M A L   T E R M I N A T I O N
+
