@@ -81,19 +81,18 @@ C_epi=4*ones(size(F_epi,1),1);
 % % % % % % % [N,P,NV]=patchNormal(F,V);
 % % % % % % % s=mean(patchEdgeLengths(F,V));
 % % % % % % % quiverVec(P,N,s,'k')
-cmd
 
 % % Mesh using tetgen
 %Find interior point
 V_inner=getInnerPoint(F,V);
 
 
-% % % % % % % % % Visualize interior point
-% % % % % % % cFigure; hold on;
-% % % % % % % gpatch(F,V,'w','none',0.5);
-% % % % % % % plotV(V_inner,'r.','MarkerSize',25)
-% % % % % % % axisGeom; camlight headlight;
-% % % % % % % drawnow;
+% % % % Visualize interior point
+% % cFigure; hold on;
+% % gpatch(F,V,'w','none',0.5);
+% % plotV(V_inner,'r.','MarkerSize',25)
+% % axisGeom; camlight headlight;
+% % drawnow;
 
 %%
 
@@ -115,13 +114,13 @@ V=meshOutput.nodes;
 Fb=meshOutput.facesBoundary;
 Cb=meshOutput.boundaryMarker;
 CE=meshOutput.elementMaterialID;
-
-% % % % % % % meshView(meshOutput);
-
-% % % % % % % cFigure; hold on;
-% % % % % % % gpatch(Fb,V,Cb,'k',1);
-% % % % % % % axisGeom; camlight headlight;
-% % % % % % % drawnow;
+% 
+% % % % % % % % meshView(meshOutput);
+% cFigure; hold on;
+% gpatch(Fb,V,Cb,'k',0.1);
+% patchNormPlot(Fb,V);
+% axisGeom; camlight headlight;
+% drawnow;
 
 
 %%
