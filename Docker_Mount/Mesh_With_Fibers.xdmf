@@ -37,6 +37,15 @@
         </Attribute>
       </Grid>
     </Grid>
+    <Grid Name="ApexGradient" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="ApexGradient" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="ApexGradient" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="51612 3" Format="HDF">Mesh_With_Fibers.h5:/Function/ApexGradient/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
     <Grid Name="Facet tags" GridType="Uniform">
       <xi:include xpointer="xpointer(/Xdmf/Domain/Grid/Geometry)" />
       <Topology TopologyType="Triangle" NumberOfElements="21878" NodesPerElement="3">

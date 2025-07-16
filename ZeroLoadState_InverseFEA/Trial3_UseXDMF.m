@@ -266,7 +266,7 @@ febio_spec.Output.logfile.node_data{1}.ATTR.data='ux;uy;uz';
 febio_spec.Output.logfile.node_data{1}.ATTR.delim=',';
 
 febio_spec.Output.logfile.element_data{1}.ATTR.file=febioLogFileName_stress;
-febio_spec.Output.logfile.element_data{1}.ATTR.data='s1';
+febio_spec.Output.logfile.element_data{1}.ATTR.data='s1;s2;s3';
 febio_spec.Output.logfile.element_data{1}.ATTR.delim=',';
 
 febio_spec.Output.plotfile.compression=0;
@@ -333,9 +333,10 @@ while 1>0
     
     error_matrix = V_FinalDeformed - V_original;
     mesh_update
-    error = abs(mean(error_matrix,"all"))
+    % error = abs(mean(error_matrix,"all"))
+    error = rmse(V_FinalDeformed,V_original,"all")
     % pause
-    if error < 1e-4 || mesh_update == 10
+    if error < 1e-4 || mesh_update == 1
         break;
     end
     if runFlag ~= 1
@@ -345,7 +346,7 @@ while 1>0
 
 end
 
-%% Animation
+%% Animation Over all runs
 
 timeVec = 1:1:mesh_update;
 N_disp_mat = V_all - repmat(V_original,[1,1,size(V_all,3)]);
@@ -379,8 +380,59 @@ end
 anim8(hf,animStruct); %Initiate animation feature
 drawnow;
 
+%% Animation of last simulation
+    dataStruct=importFEBio_logfile(fullfile(savePath,febioLogFileName_disp),0,1);
+    dataStruct_stress=importFEBio_logfile(fullfile(savePath,febioLogFileName_stress),0,1);
+
+    %Access data
+    N_disp_mat=dataStruct.data; %Displacement
+    N_stress_mat=dataStruct_stress.data; %Stress
+    timeVec=dataStruct.time; %Time
+
+    %Create deformed coordinate set
+    V_DEF=N_disp_mat+repmat(V,[1 1 size(N_disp_mat,3)]);
+    % Plotting the simulated results using anim8 to visualize and animate deformations
+    DN_magnitude=sqrt(sum(N_disp_mat(:,:,end).^2,2)); %Current displacement magnitude
+
+    S1 = N_stress_mat(:,1,end);
+    S2 = N_stress_mat(:,1,end);
+    S3 = N_stress_mat(:,1,end);
+    Eff_stress = (((S1-S2).^2 + (S2-S3).^2 + (S3-S1).^2)/2).^0.5;
+
+    % Create basic view and store graphics handle to initiate animation
+    hf=cFigure; %Open figure
+    gtitle([febioFebFileNamePart,': Press play to animate']);
+    title('Effective Stress','Interpreter','Latex')
+    hp=gpatch(Fb,V_DEF(:,:,end),Eff_stress,'k',1); %Add graphics object to animate
+    hp.Marker='.';
+    hp.MarkerSize=markerSize/10;
+    hp.FaceColor='interp';
+
+    axisGeom(gca,fontSize);
+    colormap(gjet(250)); colorbar;
+    caxis([0 max(Eff_stress)]);
+    axis(axisLim(V_DEF)); %Set axis limits statically
+    camlight headlight;
+
+    % Set up animation features
+    animStruct.Time=timeVec; %The time vector
+    for qt=1:1:size(N_disp_mat,3) %Loop over time increments
+        S1 = N_stress_mat(:,1,qt);
+        S2 = N_stress_mat(:,1,qt);
+        S3 = N_stress_mat(:,1,qt);
+        Eff_stress = (((S1-S2).^2 + (S2-S3).^2 + (S3-S1).^2)/2).^0.5;
+
+        %Set entries in animation structure
+        animStruct.Handles{qt}=[hp hp]; %Handles of objects to animate
+        animStruct.Props{qt}={'Vertices','CData'}; %Properties of objects to animate
+        animStruct.Set{qt}={V_DEF(:,:,qt),Eff_stress}; %Property values for to set in order to animate
+    end
+    anim8(hf,animStruct); %Initiate animation feature
+    drawnow;
 
 
+
+%% Functions
 
 function data = readXDMF(filename)
 
