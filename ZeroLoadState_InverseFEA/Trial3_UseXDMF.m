@@ -49,7 +49,7 @@ data = readXDMF(filename);
 
 V = data.Groups(2).Groups(1).Datasets(1).Value';
 E = data.Groups(2).Groups(1).Datasets(2).Value';
-E = E+1;
+E = double(E)+1;
 Fb = data.Groups(3).Groups(2).Datasets(2).Value';
 Fb = Fb+1;
 Cb = data.Groups(3).Groups(2).Datasets(1).Value';
@@ -395,22 +395,24 @@ drawnow;
     DN_magnitude=sqrt(sum(N_disp_mat(:,:,end).^2,2)); %Current displacement magnitude
 
     S1 = N_stress_mat(:,1,end);
-    S2 = N_stress_mat(:,1,end);
-    S3 = N_stress_mat(:,1,end);
+    S2 = N_stress_mat(:,2,end);
+    S3 = N_stress_mat(:,3,end);
     Eff_stress = (((S1-S2).^2 + (S2-S3).^2 + (S3-S1).^2)/2).^0.5;
+
+    [CV]=faceToVertexMeasure(E,V,Eff_stress);
 
     % Create basic view and store graphics handle to initiate animation
     hf=cFigure; %Open figure
     gtitle([febioFebFileNamePart,': Press play to animate']);
-    title('Effective Stress','Interpreter','Latex')
-    hp=gpatch(Fb,V_DEF(:,:,end),Eff_stress,'k',1); %Add graphics object to animate
+    title('Von Mises Stress','Interpreter','Latex')
+    hp=gpatch(Fb,V_DEF(:,:,end),CV,'k',1); %Add graphics object to animate
     hp.Marker='.';
     hp.MarkerSize=markerSize/10;
     hp.FaceColor='interp';
 
     axisGeom(gca,fontSize);
     colormap(gjet(250)); colorbar;
-    caxis([0 max(Eff_stress)]);
+    caxis([0 10]);
     axis(axisLim(V_DEF)); %Set axis limits statically
     camlight headlight;
 
@@ -418,14 +420,16 @@ drawnow;
     animStruct.Time=timeVec; %The time vector
     for qt=1:1:size(N_disp_mat,3) %Loop over time increments
         S1 = N_stress_mat(:,1,qt);
-        S2 = N_stress_mat(:,1,qt);
-        S3 = N_stress_mat(:,1,qt);
+        S2 = N_stress_mat(:,2,qt);
+        S3 = N_stress_mat(:,3,qt);
         Eff_stress = (((S1-S2).^2 + (S2-S3).^2 + (S3-S1).^2)/2).^0.5;
+
+        [CV]=faceToVertexMeasure(E,V,Eff_stress);
 
         %Set entries in animation structure
         animStruct.Handles{qt}=[hp hp]; %Handles of objects to animate
         animStruct.Props{qt}={'Vertices','CData'}; %Properties of objects to animate
-        animStruct.Set{qt}={V_DEF(:,:,qt),Eff_stress}; %Property values for to set in order to animate
+        animStruct.Set{qt}={V_DEF(:,:,qt),CV}; %Property values for to set in order to animate
     end
     anim8(hf,animStruct); %Initiate animation feature
     drawnow;
