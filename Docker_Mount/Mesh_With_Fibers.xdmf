@@ -3,11 +3,11 @@
 <Xdmf Version="3.0" xmlns:xi="https://www.w3.org/2001/XInclude">
   <Domain>
     <Grid Name="Mesh" GridType="Uniform">
-      <Topology TopologyType="Tetrahedron" NumberOfElements="51612" NodesPerElement="4">
-        <DataItem Dimensions="51612 4" NumberType="Int" Format="HDF">Mesh_With_Fibers.h5:/Mesh/Mesh/topology</DataItem>
+      <Topology TopologyType="Tetrahedron" NumberOfElements="86077" NodesPerElement="4">
+        <DataItem Dimensions="86077 4" NumberType="Int" Format="HDF">Mesh_With_Fibers.h5:/Mesh/Mesh/topology</DataItem>
       </Topology>
       <Geometry GeometryType="XYZ">
-        <DataItem Dimensions="14551 3" Format="HDF">Mesh_With_Fibers.h5:/Mesh/Mesh/geometry</DataItem>
+        <DataItem Dimensions="20141 3" Format="HDF">Mesh_With_Fibers.h5:/Mesh/Mesh/geometry</DataItem>
       </Geometry>
     </Grid>
     <Grid Name="FiberDirection" GridType="Collection" CollectionType="Temporal">
@@ -15,7 +15,7 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="FiberDirection" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">Mesh_With_Fibers.h5:/Function/FiberDirection/0</DataItem>
+          <DataItem Dimensions="86077 3" Format="HDF">Mesh_With_Fibers.h5:/Function/FiberDirection/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
@@ -24,7 +24,7 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="SheetDirection" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">Mesh_With_Fibers.h5:/Function/SheetDirection/0</DataItem>
+          <DataItem Dimensions="86077 3" Format="HDF">Mesh_With_Fibers.h5:/Function/SheetDirection/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
@@ -33,7 +33,7 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="Normal" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">Mesh_With_Fibers.h5:/Function/Normal/0</DataItem>
+          <DataItem Dimensions="86077 3" Format="HDF">Mesh_With_Fibers.h5:/Function/Normal/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
@@ -42,7 +42,7 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="ApexGradient" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">Mesh_With_Fibers.h5:/Function/ApexGradient/0</DataItem>
+          <DataItem Dimensions="86077 3" Format="HDF">Mesh_With_Fibers.h5:/Function/ApexGradient/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
@@ -57,11 +57,11 @@
     </Grid>
     <Grid Name="Cell tags" GridType="Uniform">
       <xi:include xpointer="xpointer(/Xdmf/Domain/Grid/Geometry)" />
-      <Topology TopologyType="Tetrahedron" NumberOfElements="51612" NodesPerElement="4">
-        <DataItem Dimensions="51612 4" NumberType="Int" Format="HDF">Mesh_With_Fibers.h5:/MeshTags/Cell tags/topology</DataItem>
+      <Topology TopologyType="Tetrahedron" NumberOfElements="86077" NodesPerElement="4">
+        <DataItem Dimensions="86077 4" NumberType="Int" Format="HDF">Mesh_With_Fibers.h5:/MeshTags/Cell tags/topology</DataItem>
       </Topology>
       <Attribute Name="Cell tags" AttributeType="Scalar" Center="Cell">
-        <DataItem Dimensions="51612 1" Format="HDF">Mesh_With_Fibers.h5:/MeshTags/Cell tags/Values</DataItem>
+        <DataItem Dimensions="86077 1" Format="HDF">Mesh_With_Fibers.h5:/MeshTags/Cell tags/Values</DataItem>
       </Attribute>
     </Grid>
   </Domain>

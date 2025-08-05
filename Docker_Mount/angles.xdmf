@@ -3,11 +3,11 @@
 <Xdmf Version="3.0" xmlns:xi="https://www.w3.org/2001/XInclude">
   <Domain>
     <Grid Name="Mesh" GridType="Uniform">
-      <Topology TopologyType="Tetrahedron" NumberOfElements="51612" NodesPerElement="4">
-        <DataItem Dimensions="51612 4" NumberType="Int" Format="HDF">angles.h5:/Mesh/Mesh/topology</DataItem>
+      <Topology TopologyType="Tetrahedron" NumberOfElements="86077" NodesPerElement="4">
+        <DataItem Dimensions="86077 4" NumberType="Int" Format="HDF">angles.h5:/Mesh/Mesh/topology</DataItem>
       </Topology>
       <Geometry GeometryType="XYZ">
-        <DataItem Dimensions="14551 3" Format="HDF">angles.h5:/Mesh/Mesh/geometry</DataItem>
+        <DataItem Dimensions="20141 3" Format="HDF">angles.h5:/Mesh/Mesh/geometry</DataItem>
       </Geometry>
     </Grid>
     <Grid Name="FiberDirection" GridType="Collection" CollectionType="Temporal">
@@ -15,7 +15,7 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="FiberDirection" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">angles.h5:/Function/FiberDirection/0</DataItem>
+          <DataItem Dimensions="86077 3" Format="HDF">angles.h5:/Function/FiberDirection/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
@@ -24,16 +24,25 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="ApexGradient" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">angles.h5:/Function/ApexGradient/0</DataItem>
+          <DataItem Dimensions="86077 3" Format="HDF">angles.h5:/Function/ApexGradient/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
-    <Grid Name="f" GridType="Collection" CollectionType="Temporal">
-      <Grid Name="f" GridType="Uniform">
+    <Grid Name="EpiGradient" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="EpiGradient" GridType="Uniform">
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
-        <Attribute Name="f" AttributeType="Vector" Center="Cell">
-          <DataItem Dimensions="51612 3" Format="HDF">angles.h5:/Function/f/0</DataItem>
+        <Attribute Name="EpiGradient" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="86077 3" Format="HDF">angles.h5:/Function/EpiGradient/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="TangentialGradient" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="TangentialGradient" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="TangentialGradient" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="86077 3" Format="HDF">angles.h5:/Function/TangentialGradient/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>
@@ -42,7 +51,25 @@
         <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
         <Time Value="0" />
         <Attribute Name="fiber_angle" AttributeType="Scalar" Center="Cell">
-          <DataItem Dimensions="51612 1" Format="HDF">angles.h5:/Function/fiber_angle/0</DataItem>
+          <DataItem Dimensions="86077 1" Format="HDF">angles.h5:/Function/fiber_angle/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="LVGradient" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="LVGradient" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="LVGradient" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="86077 3" Format="HDF">angles.h5:/Function/LVGradient/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="RVGradient" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="RVGradient" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="RVGradient" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="86077 3" Format="HDF">angles.h5:/Function/RVGradient/0</DataItem>
         </Attribute>
       </Grid>
     </Grid>

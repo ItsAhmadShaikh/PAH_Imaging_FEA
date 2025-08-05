@@ -14,6 +14,10 @@ lineWidth=3;
 % savePath=uigetdir();
 savePath=fullfile(pwd,"FeBio");
 
+pressureScale = 1;
+
+materialScale = 25;
+
 % Defining file names
 febioFebFileNamePart='tempModel';
 febioFebFileName=fullfile(savePath,[febioFebFileNamePart,'.feb']); %FEB file name
@@ -101,11 +105,11 @@ F_base_BC = Fb(Cb==1,:);
 bcSupportList = unique(F_base_BC(:));
 
 %PressureSurfaces
-% F_LV_pressure=Fb(Cb==2,:);
-F_LV_pressure= fliplr(Fb(Cb==3,:));
+F_LV_pressure=Fb(Cb==3,:);
+% F_LV_pressure= fliplr(Fb(Cb==3,:));
 
-% F_RV_pressure=Fb(Cb==3,:);
-F_RV_pressure= fliplr(Fb(Cb==4,:));
+F_RV_pressure=Fb(Cb==4,:);
+% F_RV_pressure= fliplr(Fb(Cb==4,:));
 
 % Visualize BC and Load
 % visualizeBC(Fb,V,bcSupportList,F_LV_pressure,F_RV_pressure)
@@ -136,17 +140,25 @@ end
 
 Edge_LV=patchBoundary(F_LV_pressure);
 [F_LV,V_LV,C_LV] = triSurfCloseHoles(double(F_LV_pressure),V,0.5,double(Edge_LV));
+F_LV = patchNormalFix(F_LV);
+F_LV = fliplr(F_LV);
 [volEst_LV]=patchVolume(F_LV,V_LV)
+Vol_LV = volEst_LV;
 
 Edge_RV=patchBoundary(F_RV_pressure);
 [F_RV,V_RV,C_RV] = triSurfCloseHoles(double(F_RV_pressure),V,0.5,double(Edge_RV));
+F_RV = patchNormalFix(F_RV);
+F_RV = fliplr(F_RV);
 [volEst_RV]=patchVolume(F_RV,V_RV)
+Vol_RV = volEst_RV;
 
 
 cFigure; 
 hold on;
 gpatch(F_LV,V_LV,C_LV);
+patchNormPlot(F_LV,V_LV);
 gpatch(F_RV,V_RV,C_RV);
+patchNormPlot(F_RV,V_RV);
 axisGeom; camlight headlight;
 drawnow;
 
@@ -170,7 +182,7 @@ febio_spec.ATTR.version='4.0';
 febio_spec.Module.ATTR.type='solid';
 
 %Control section
-febio_spec.Control.analysis='DYNAMIC';
+febio_spec.Control.analysis='STATIC';%'DYNAMIC';
 febio_spec.Control.time_steps=numTimeSteps;
 febio_spec.Control.step_size=1/numTimeSteps;
 febio_spec.Control.solver.max_refs=max_refs;
@@ -184,23 +196,41 @@ febio_spec.Control.time_stepper.opt_iter=opt_iter;
 
 
 %Material section
+% materialName1='Material1';
+% febio_spec.Material.material{1}.ATTR.name=materialName1;
+% febio_spec.Material.material{1}.ATTR.type='Holzapfel_Ogden';
+% febio_spec.Material.material{1}.ATTR.id=1;
+% febio_spec.Material.material{1}.a=0.5/materialScale;
+% febio_spec.Material.material{1}.b=6;
+% febio_spec.Material.material{1}.af=1/materialScale;
+% febio_spec.Material.material{1}.bf=6;
+% febio_spec.Material.material{1}.as=0.1/materialScale;
+% febio_spec.Material.material{1}.bs=4.0;
+% febio_spec.Material.material{1}.afs=0.0;
+% febio_spec.Material.material{1}.bfs=0.0;
+% febio_spec.Material.material{1}.asn=0.0;
+% febio_spec.Material.material{1}.bsn=0.0;
+% febio_spec.Material.material{1}.anf=0.0;
+% febio_spec.Material.material{1}.bnf=0.0;
+% febio_spec.Material.material{1}.k=50;%10000.0;
+
 materialName1='Material1';
 febio_spec.Material.material{1}.ATTR.name=materialName1;
 febio_spec.Material.material{1}.ATTR.type='Holzapfel_Ogden';
 febio_spec.Material.material{1}.ATTR.id=1;
-febio_spec.Material.material{1}.a=7.75246;
-febio_spec.Material.material{1}.b=22.827351;
-febio_spec.Material.material{1}.af=2.306745;
-febio_spec.Material.material{1}.bf=50.0;
-febio_spec.Material.material{1}.as=0.114922;
-febio_spec.Material.material{1}.bs=109.120469;
+febio_spec.Material.material{1}.a=7.75246/materialScale;
+febio_spec.Material.material{1}.b=22.827351/materialScale;
+febio_spec.Material.material{1}.af=2.306745/materialScale;
+febio_spec.Material.material{1}.bf=50.0/materialScale;
+febio_spec.Material.material{1}.as=0.114922/materialScale;
+febio_spec.Material.material{1}.bs=109.120469/materialScale;
 febio_spec.Material.material{1}.afs=0.0;
 febio_spec.Material.material{1}.bfs=0.0;
 febio_spec.Material.material{1}.asn=0.0;
 febio_spec.Material.material{1}.bsn=0.0;
 febio_spec.Material.material{1}.anf=0.0;
 febio_spec.Material.material{1}.bnf=0.0;
-febio_spec.Material.material{1}.k=10000.0;
+febio_spec.Material.material{1}.k=50;%10000.0;
 
 
 % -> Elements
@@ -247,8 +277,8 @@ febio_spec.MeshDomains.SolidDomain.ATTR.mat=materialName1;
 febio_spec.Boundary.bc{1}.ATTR.name='FixedDisplacement01';
 febio_spec.Boundary.bc{1}.ATTR.type='zero displacement';
 febio_spec.Boundary.bc{1}.ATTR.node_set=nodeSetName1;
-febio_spec.Boundary.bc{1}.x_dof=0;
-febio_spec.Boundary.bc{1}.y_dof=0;
+febio_spec.Boundary.bc{1}.x_dof=1;
+febio_spec.Boundary.bc{1}.y_dof=1;
 febio_spec.Boundary.bc{1}.z_dof=1;
 
 
@@ -256,14 +286,14 @@ febio_spec.Boundary.bc{1}.z_dof=1;
 febio_spec.Loads.surface_load{1}.ATTR.type='pressure';
 febio_spec.Loads.surface_load{1}.ATTR.surface=LV_surfaceName;
 febio_spec.Loads.surface_load{1}.pressure.ATTR.lc=1;
-febio_spec.Loads.surface_load{1}.pressure.VAL=7;
-febio_spec.Loads.surface_load{1}.symmetric_stiffness=1;
+febio_spec.Loads.surface_load{1}.pressure.VAL=0.675 * pressureScale;
+febio_spec.Loads.surface_load{1}.symmetric_stiffness=0;
 
 febio_spec.Loads.surface_load{2}.ATTR.type='pressure';
 febio_spec.Loads.surface_load{2}.ATTR.surface=RV_surfaceName;
 febio_spec.Loads.surface_load{2}.pressure.ATTR.lc=1;
-febio_spec.Loads.surface_load{2}.pressure.VAL=7;
-febio_spec.Loads.surface_load{2}.symmetric_stiffness=1;
+febio_spec.Loads.surface_load{2}.pressure.VAL=0.185 * pressureScale; %7
+febio_spec.Loads.surface_load{2}.symmetric_stiffness=0;
 
 
 %LoadData section
@@ -349,13 +379,35 @@ while 1>0
     mesh_update = mesh_update+1;
     V_all(:,:,mesh_update) = V_update;
     V_current = V_update;
-    
+
+    [F_LV,V_LV,C_LV] = triSurfCloseHoles(double(F_LV_pressure),V_current,0.5,double(Edge_LV));
+    F_LV = patchNormalFix(F_LV);
+    F_LV = fliplr(F_LV);
+    [volEst_LV]=patchVolume(F_LV,V_LV);
+    Vol_LV = [Vol_LV volEst_LV];
+
+    [F_RV,V_RV,C_RV] = triSurfCloseHoles(double(F_RV_pressure),V_current,0.5,double(Edge_RV));
+    F_RV = patchNormalFix(F_RV);
+    F_RV = fliplr(F_RV);
+    [volEst_RV]=patchVolume(F_RV,V_RV);
+    Vol_RV = [Vol_RV volEst_RV];
+
+    cFigure; 
+    hold on;
+    gpatch(F_LV,V_LV,C_LV);
+    patchNormPlot(F_LV,V_LV);
+    gpatch(F_RV,V_RV,C_RV);
+    patchNormPlot(F_RV,V_RV);
+    axisGeom; camlight headlight;
+    drawnow;
+
     error_matrix = V_FinalDeformed - V_original;
     mesh_update
     % error = abs(mean(error_matrix,"all"))
     error = rmse(V_FinalDeformed,V_original,"all")
     % pause
-    if error < 1e-4 || mesh_update == 1
+    % if error < 1e-4 || mesh_update == 1
+    if error < 1e-2 || mesh_update == 3
         break;
     end
     if runFlag ~= 1
@@ -453,6 +505,17 @@ drawnow;
     anim8(hf,animStruct); %Initiate animation feature
     drawnow;
 
+%% Plot Volumes
+
+figure
+tiledlayout(2,1)
+nexttile
+plot(Vol_LV,'o-')
+title('LV')
+
+nexttile
+plot(Vol_RV,'o-')
+title('RV')
 
 
 %% Functions
