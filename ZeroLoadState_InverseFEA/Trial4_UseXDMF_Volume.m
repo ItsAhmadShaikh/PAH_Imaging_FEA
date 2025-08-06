@@ -21,6 +21,10 @@ materialScale = 25;
 %Material parameter set
 material = [11.82869247	13.9649032	5.476654203	50	2.861221295	2	0	50];
 
+% Applied Pressure kPA
+P_LV = 0.777016405;
+P_RV = 0.199139734;
+
 a_mat=material(1);
 b_mat=material(2);
 af_mat=material(3);
@@ -292,13 +296,13 @@ febio_spec.Boundary.bc{1}.z_dof=1;
 febio_spec.Loads.surface_load{1}.ATTR.type='pressure';
 febio_spec.Loads.surface_load{1}.ATTR.surface=LV_surfaceName;
 febio_spec.Loads.surface_load{1}.pressure.ATTR.lc=1;
-febio_spec.Loads.surface_load{1}.pressure.VAL=0.675 * pressureScale;
+febio_spec.Loads.surface_load{1}.pressure.VAL=P_LV * pressureScale;
 febio_spec.Loads.surface_load{1}.symmetric_stiffness=0;
 
 febio_spec.Loads.surface_load{2}.ATTR.type='pressure';
 febio_spec.Loads.surface_load{2}.ATTR.surface=RV_surfaceName;
 febio_spec.Loads.surface_load{2}.pressure.ATTR.lc=1;
-febio_spec.Loads.surface_load{2}.pressure.VAL=0.185 * pressureScale; %7
+febio_spec.Loads.surface_load{2}.pressure.VAL=P_RV * pressureScale; 
 febio_spec.Loads.surface_load{2}.symmetric_stiffness=0;
 
 
