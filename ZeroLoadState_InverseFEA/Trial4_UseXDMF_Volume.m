@@ -9,29 +9,34 @@ faceAlpha2=0.3;
 markerSize=40;
 lineWidth=3;
 
-% % Control parameters
+% Control parameters
 % Path names
-% savePath=uigetdir();
 savePath=fullfile(pwd,"FeBio");
 
-pressureScale = 1;
+ratname = 'Z210';
 
+pressureScale = 1;
 materialScale = 25;
 
+%Material parameter set
+material = [11.82869247	13.9649032	5.476654203	50	2.861221295	2	0	50];
+
+a_mat=material(1);
+b_mat=material(2);
+af_mat=material(3);
+bf_mat=material(4);
+as_mat=material(5);
+bs_mat=material(6);
+k_mat=material(8);
+
+
 % Defining file names
-febioFebFileNamePart='tempModel';
+febioFebFileNamePart=ratname;
 febioFebFileName=fullfile(savePath,[febioFebFileNamePart,'.feb']); %FEB file name
 febioLogFileName=[febioFebFileNamePart,'.txt']; %FEBio log file name
 febioLogFileName_disp=[febioFebFileNamePart,'_disp_out.txt']; %Log file name for exporting displacement
 febioLogFileName_force=[febioFebFileNamePart,'_force_out.txt']; %Log file name for exporting force
 febioLogFileName_stress=[febioFebFileNamePart,'_stress_out.txt']; %Log file name for exporting stress
-
-% %Material parameter set
-% c1=1e-3; %Shear-modulus-like parameter
-% m1=8; %Material parameter setting degree of non-linearity
-% k_factor=1e2; %Bulk modulus factor
-% k=c1*k_factor; %Bulk modulus
-
 
 % FEA control settings
 analysisType='DYNAMIC';
@@ -48,7 +53,8 @@ runMode='internal';% 'internal' or 'external'
 
 
 % Load Geometry
-filename = "C:\Users\ahmad\OneDrive - UC San Diego\DVJ_Lab\cMRI\Code_GitHub\Docker_Mount\Mesh_With_Fibers.h5";
+parentdir = fullfile(fullfile(pwd, '..'),'Volume_Meshes');
+filename = fullfile(parentdir, strcat(ratname,'_With_Fibers.h5'));
 data = readXDMF(filename);
 
 V = data.Groups(2).Groups(1).Datasets(1).Value';
@@ -218,19 +224,19 @@ materialName1='Material1';
 febio_spec.Material.material{1}.ATTR.name=materialName1;
 febio_spec.Material.material{1}.ATTR.type='Holzapfel_Ogden';
 febio_spec.Material.material{1}.ATTR.id=1;
-febio_spec.Material.material{1}.a=7.75246/materialScale;
-febio_spec.Material.material{1}.b=22.827351/materialScale;
-febio_spec.Material.material{1}.af=2.306745/materialScale;
-febio_spec.Material.material{1}.bf=50.0/materialScale;
-febio_spec.Material.material{1}.as=0.114922/materialScale;
-febio_spec.Material.material{1}.bs=109.120469/materialScale;
+febio_spec.Material.material{1}.a= a_mat /materialScale;
+febio_spec.Material.material{1}.b= b_mat /materialScale;
+febio_spec.Material.material{1}.af= af_mat /materialScale;
+febio_spec.Material.material{1}.bf= bf_mat /materialScale;
+febio_spec.Material.material{1}.as= as_mat /materialScale;
+febio_spec.Material.material{1}.bs= bs_mat /materialScale;
 febio_spec.Material.material{1}.afs=0.0;
 febio_spec.Material.material{1}.bfs=0.0;
 febio_spec.Material.material{1}.asn=0.0;
 febio_spec.Material.material{1}.bsn=0.0;
 febio_spec.Material.material{1}.anf=0.0;
 febio_spec.Material.material{1}.bnf=0.0;
-febio_spec.Material.material{1}.k=50;%10000.0;
+febio_spec.Material.material{1}.k= k_mat;%10000.0;
 
 
 % -> Elements

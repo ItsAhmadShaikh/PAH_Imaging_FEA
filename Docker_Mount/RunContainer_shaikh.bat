@@ -1,0 +1,1 @@
+docker run --init --rm -ti  --name testing -v "//c/Users/ahmad/OneDrive - UC San Diego/DVJ_Lab/cMRI/Code_GitHub/Docker_Mount":"/home/fenics/shared" -p 8888:8888 fenicsx_fibers_jupyter --NotebookApp.token=''

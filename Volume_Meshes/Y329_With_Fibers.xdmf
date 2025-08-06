@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="https://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="Mesh" GridType="Uniform">
+      <Topology TopologyType="Tetrahedron" NumberOfElements="147835" NodesPerElement="4">
+        <DataItem Dimensions="147835 4" NumberType="Int" Format="HDF">Y329_With_Fibers.h5:/Mesh/Mesh/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XYZ">
+        <DataItem Dimensions="33818 3" Format="HDF">Y329_With_Fibers.h5:/Mesh/Mesh/geometry</DataItem>
+      </Geometry>
+    </Grid>
+    <Grid Name="FiberDirection" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="FiberDirection" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="FiberDirection" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="147835 3" Format="HDF">Y329_With_Fibers.h5:/Function/FiberDirection/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="SheetDirection" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="SheetDirection" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="SheetDirection" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="147835 3" Format="HDF">Y329_With_Fibers.h5:/Function/SheetDirection/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="Normal" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="Normal" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="Normal" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="147835 3" Format="HDF">Y329_With_Fibers.h5:/Function/Normal/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="ApexGradient" GridType="Collection" CollectionType="Temporal">
+      <Grid Name="ApexGradient" GridType="Uniform">
+        <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@GridType='Uniform'][1]/*[self::Topology or self::Geometry])" />
+        <Time Value="0" />
+        <Attribute Name="ApexGradient" AttributeType="Vector" Center="Cell">
+          <DataItem Dimensions="147835 3" Format="HDF">Y329_With_Fibers.h5:/Function/ApexGradient/0</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    <Grid Name="Facet tags" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid/Geometry)" />
+      <Topology TopologyType="Triangle" NumberOfElements="33518" NodesPerElement="3">
+        <DataItem Dimensions="33518 3" NumberType="Int" Format="HDF">Y329_With_Fibers.h5:/MeshTags/Facet tags/topology</DataItem>
+      </Topology>
+      <Attribute Name="Facet tags" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="33518 1" Format="HDF">Y329_With_Fibers.h5:/MeshTags/Facet tags/Values</DataItem>
+      </Attribute>
+    </Grid>
+    <Grid Name="Cell tags" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid/Geometry)" />
+      <Topology TopologyType="Tetrahedron" NumberOfElements="147835" NodesPerElement="4">
+        <DataItem Dimensions="147835 4" NumberType="Int" Format="HDF">Y329_With_Fibers.h5:/MeshTags/Cell tags/topology</DataItem>
+      </Topology>
+      <Attribute Name="Cell tags" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="147835 1" Format="HDF">Y329_With_Fibers.h5:/MeshTags/Cell tags/Values</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
