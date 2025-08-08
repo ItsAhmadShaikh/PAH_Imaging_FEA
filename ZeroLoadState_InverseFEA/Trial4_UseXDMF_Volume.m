@@ -13,17 +13,18 @@ lineWidth=3;
 % Path names
 savePath=fullfile(pwd,"FeBio");
 
-ratname = 'Z210';
+ratname = 'Y325';
 
 pressureScale = 1;
 materialScale = 25;
 
 %Material parameter set
-material = [11.82869247	13.9649032	5.476654203	50	2.861221295	2	0	50];
+material = [15.9856544	18.84595999	8.505429253	28.9170484	2.836347059	56.56703134	0	50];
 
 % Applied Pressure kPA
-P_LV = 0.777016405;
-P_RV = 0.199139734;
+Pressure_LVRV = [0.926173767	0.830633068];
+P_LV = Pressure_LVRV(1);
+P_RV = Pressure_LVRV(2);
 
 a_mat=material(1);
 b_mat=material(2);
@@ -471,7 +472,7 @@ drawnow;
     timeVec=dataStruct.time; %Time
 
     %Create deformed coordinate set
-    V_DEF=N_disp_mat+repmat(V,[1 1 size(N_disp_mat,3)]);
+    V_DEF=N_disp_mat+repmat(V_current,[1 1 size(N_disp_mat,3)]);
     % Plotting the simulated results using anim8 to visualize and animate deformations
     DN_magnitude=sqrt(sum(N_disp_mat(:,:,end).^2,2)); %Current displacement magnitude
 
@@ -480,7 +481,7 @@ drawnow;
     S3 = N_stress_mat(:,3,end);
     Eff_stress = (((S1-S2).^2 + (S2-S3).^2 + (S3-S1).^2)/2).^0.5;
 
-    [CV]=faceToVertexMeasure(E,V,Eff_stress);
+    [CV]=faceToVertexMeasure(E,V_current,Eff_stress);
 
     % Create basic view and store graphics handle to initiate animation
     hf=cFigure; %Open figure
@@ -493,7 +494,7 @@ drawnow;
 
     axisGeom(gca,fontSize);
     colormap(gjet(250)); colorbar;
-    caxis([0 10]);
+    caxis([0 1]);
     axis(axisLim(V_DEF)); %Set axis limits statically
     camlight headlight;
 
@@ -505,7 +506,7 @@ drawnow;
         S3 = N_stress_mat(:,3,qt);
         Eff_stress = (((S1-S2).^2 + (S2-S3).^2 + (S3-S1).^2)/2).^0.5;
 
-        [CV]=faceToVertexMeasure(E,V,Eff_stress);
+        [CV]=faceToVertexMeasure(E,V_current,Eff_stress);
 
         %Set entries in animation structure
         animStruct.Handles{qt}=[hp hp]; %Handles of objects to animate
