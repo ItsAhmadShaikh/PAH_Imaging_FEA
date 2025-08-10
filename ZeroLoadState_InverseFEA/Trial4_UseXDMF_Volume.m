@@ -13,16 +13,16 @@ lineWidth=3;
 % Path names
 savePath=fullfile(pwd,"FeBio");
 
-ratname = 'Y325';
+ratname = 'Y329';
 
 pressureScale = 1;
-materialScale = 25;
+materialScale = 50;
 
 %Material parameter set
-material = [15.9856544	18.84595999	8.505429253	28.9170484	2.836347059	56.56703134	0	50];
+material = [11.59417691	22.67582138	3.859501476	50	0.769353272	119.6646038	0	50];
 
 % Applied Pressure kPA
-Pressure_LVRV = [0.926173767	0.830633068];
+Pressure_LVRV = [0.930186086	1.192551145];
 P_LV = Pressure_LVRV(1);
 P_RV = Pressure_LVRV(2);
 
@@ -331,6 +331,9 @@ febio_spec.Output.logfile.element_data{1}.ATTR.delim=',';
 
 febio_spec.Output.plotfile.compression=0;
 
+er_num = 0;
+terminate =0;
+
 while 1>0
     visualizeBC(Fb,V_current,bcSupportList,F_LV_pressure,F_RV_pressure)
 
@@ -350,7 +353,29 @@ while 1>0
     febioAnalysis.runMode=runMode;
     
     [runFlag]=runMonitorFEBio(febioAnalysis);%START FEBio NOW!!!!!!!!
-    
+
+    if runFlag ~= 1
+        fprintf('\n FeBio Error \n');
+        % pause;
+        % Add back quarter the displacement to effectively get V_updated = V_current - (a fraction of)*N_disp_from_original
+        if er_num == 0
+            V_current = V_current + (N_disp_from_original*0.5);
+            er_num = er_num+1;
+        elseif er_num > 0 && er_num < 5
+            V_current = V_current + (N_disp_from_original*0.1);
+            er_num = er_num+1;
+        else
+            V_current = V_current + (N_disp_from_original*0.1);
+            terminate = 1;
+        end
+        continue;
+    %     febio_spec.Loads.surface_load{1}.pressure.VAL=P_LV * pressureScale *0.5;
+    %     febio_spec.Loads.surface_load{2}.pressure.VAL=P_RV * pressureScale *0.5;
+    % else
+    %     febio_spec.Loads.surface_load{1}.pressure.VAL=P_LV * pressureScale;
+    %     febio_spec.Loads.surface_load{2}.pressure.VAL=P_RV * pressureScale; 
+    end
+    er_num = 0;
     
     %%
     
@@ -418,12 +443,8 @@ while 1>0
     error = rmse(V_FinalDeformed,V_original,"all")
     % pause
     % if error < 1e-4 || mesh_update == 1
-    if error < 1e-2 || mesh_update == 3
+    if error < 1e-1 || mesh_update == 10 || terminate == 1
         break;
-    end
-    if runFlag ~= 1
-        fprintf('\n FeBio Error \n');
-        break
     end
 
 end
@@ -524,9 +545,13 @@ nexttile
 plot(Vol_LV,'o-')
 title('LV')
 
+Vol_LV_compare = [Vol_LV(1), Vol_LV(end)]
+
 nexttile
 plot(Vol_RV,'o-')
 title('RV')
+
+Vol_RV_compare = [Vol_RV(1), Vol_RV(end)]
 
 
 %% Functions
