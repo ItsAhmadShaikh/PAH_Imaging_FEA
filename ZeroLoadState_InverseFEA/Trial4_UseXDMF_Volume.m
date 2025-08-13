@@ -1,6 +1,8 @@
 clear all
 clc
 close all
+% addpath(genpath('C:\Program Files\MATLAB\Downloaded_AddOns'))
+% Need export_fig addon to save gif
 
 % % Plot settings
 fontSize=15;
@@ -13,16 +15,16 @@ lineWidth=3;
 % Path names
 savePath=fullfile(pwd,"FeBio");
 
-ratname = 'Y329';
+ratname = 'Y325';
 
 pressureScale = 1;
 materialScale = 50;
 
 %Material parameter set
-material = [11.59417691	22.67582138	3.859501476	50	0.769353272	119.6646038	0	50];
+material = [15.9856544	18.84595999	8.505429253	28.9170484	2.836347059	56.56703134	0	50];
 
 % Applied Pressure kPA
-Pressure_LVRV = [0.930186086	1.192551145];
+Pressure_LVRV = [0.926173767	0.830633068];
 P_LV = Pressure_LVRV(1);
 P_RV = Pressure_LVRV(2);
 
@@ -112,15 +114,16 @@ Fb = Fb_fix;
 %%
 
 %BCs
-F_base_BC = Fb(Cb==1,:);
+% F_base_BC = Fb(Cb==1,:);
+F_base_BC = Fb(Cb==2,:);
 bcSupportList = unique(F_base_BC(:));
 
 %PressureSurfaces
 F_LV_pressure=Fb(Cb==3,:);
-% F_LV_pressure= fliplr(Fb(Cb==3,:));
+F_LV_pressure= fliplr(Fb(Cb==3,:));
 
 F_RV_pressure=Fb(Cb==4,:);
-% F_RV_pressure= fliplr(Fb(Cb==4,:));
+F_RV_pressure= fliplr(Fb(Cb==4,:));
 
 % Visualize BC and Load
 % visualizeBC(Fb,V,bcSupportList,F_LV_pressure,F_RV_pressure)
