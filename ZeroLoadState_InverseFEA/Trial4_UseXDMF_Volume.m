@@ -15,16 +15,16 @@ lineWidth=3;
 % Path names
 savePath=fullfile(pwd,"FeBio");
 
-ratname = 'Y325';
+ratname = 'Z210';
 
 pressureScale = 1;
-materialScale = 50;
+materialScale = 25;
 
 %Material parameter set
-material = [15.9856544	18.84595999	8.505429253	28.9170484	2.836347059	56.56703134	0	50];
+material = [11.82869247	13.9649032	5.476654203	50	2.861221295	2	0	50];
 
 % Applied Pressure kPA
-Pressure_LVRV = [0.926173767	0.830633068];
+Pressure_LVRV = [0.777016405	0.199139734];
 P_LV = Pressure_LVRV(1);
 P_RV = Pressure_LVRV(2);
 
@@ -114,16 +114,16 @@ Fb = Fb_fix;
 %%
 
 %BCs
-% F_base_BC = Fb(Cb==1,:);
-F_base_BC = Fb(Cb==2,:);
+F_base_BC = Fb(Cb==1,:);
+% F_base_BC = Fb(Cb==2,:);
 bcSupportList = unique(F_base_BC(:));
 
 %PressureSurfaces
 F_LV_pressure=Fb(Cb==3,:);
-F_LV_pressure= fliplr(Fb(Cb==3,:));
+% F_LV_pressure= fliplr(Fb(Cb==3,:));
 
 F_RV_pressure=Fb(Cb==4,:);
-F_RV_pressure= fliplr(Fb(Cb==4,:));
+% F_RV_pressure= fliplr(Fb(Cb==4,:));
 
 % Visualize BC and Load
 % visualizeBC(Fb,V,bcSupportList,F_LV_pressure,F_RV_pressure)
@@ -446,7 +446,7 @@ while 1>0
     error = rmse(V_FinalDeformed,V_original,"all")
     % pause
     % if error < 1e-4 || mesh_update == 1
-    if error < 1e-1 || mesh_update == 10 || terminate == 1
+    if error < 1e-1 || mesh_update == 3 || terminate == 1
         break;
     end
 
